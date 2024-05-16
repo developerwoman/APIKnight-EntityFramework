@@ -1,13 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using APIKnight.Entities;
 
-
 namespace APIKnight.Data
 {
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
         public DbSet<Knight> Knights { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Entities.Attribute> Attributes { get; set; }
@@ -21,7 +19,6 @@ namespace APIKnight.Data
                 b.HasKey(e => e.KnightId);
                 b.Property(e => e.KnightId).ValueGeneratedOnAdd();
             });
-
 
             modelBuilder.Entity<Knight>()
                 .Property(p => p.Name)
@@ -54,10 +51,8 @@ namespace APIKnight.Data
                 .WithOne(e => e.Knight)
                 .HasForeignKey(e => e.KnightWeaponID);
 
-
             modelBuilder.Entity<Knight>()
                   .HasOne(e => e.Attribute);
-
 
             modelBuilder.Entity<Knight>()
                 .ToTable("Knights");
@@ -98,7 +93,6 @@ namespace APIKnight.Data
                 .Property(x => x.Charism)
                 .HasColumnType("int");
 
-
             modelBuilder.Entity<Entities.Attribute>()
                 .ToTable("Attributes");
 
@@ -120,7 +114,6 @@ namespace APIKnight.Data
             modelBuilder.Entity<Weapon>()
                 .Property(x => x.Mod)
                 .HasColumnType("int");
-
 
             modelBuilder.Entity<Weapon>()
                 .Property(x => x.Attr)
